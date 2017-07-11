@@ -17,7 +17,6 @@ public class UserServiceImpl implements IUserService {
     private IUserDao userDao;  
     
     public User getUserById(int userId) {  
-        // TODO Auto-generated method stub  
         return this.userDao.selectByPrimaryKey(userId);  
     }  
   

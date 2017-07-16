@@ -28,9 +28,35 @@ public class TestMyBatis {
   
     @Test  
     public void test1() {  
-        User user = userService.getUserById(2);  
+    	User user = userService.getUserById(1);  
         // System.out.println(user.getUserName());  
         // logger.info("鍊硷細"+user.getUserName());  
-        logger.info(JSON.toJSONString(user));  
+        logger.info(getFunc() + ": " + JSON.toJSONString(user));  
     }  
+    
+    @Test  
+    public void testGetByUserName() {  
+        User user = userService.getUserByUserName("test");  
+        // System.out.println(user.getUserName());  
+        // logger.info("鍊硷細"+user.getUserName());  
+        logger.info(getFunc() + ": " + JSON.toJSONString(user));  
+    }  
+    
+    @Test  
+    public void testHasMatchUser() {  
+        boolean hasUser = userService.hasMatchUser("evan", "123");  
+        // System.out.println(user.getUserName());  
+        // logger.info("鍊硷細"+user.getUserName());  
+        logger.info(getFunc() + ": " + (hasUser? "has user : evan" : "evan is not exist or password is wrong!") );  
+        
+        hasUser = userService.hasMatchUser("evan", "234");  
+        // System.out.println(user.getUserName());  
+        // logger.info("鍊硷細"+user.getUserName());  
+        logger.info(getFunc() + ": " + (hasUser? "has user : evan" : "evan is not exist or password is wrong!") );  
+    }  
+    
+    private String getFunc() {
+    	StackTraceElement[] traces = (new Exception()).getStackTrace();
+    	return traces[1].getMethodName();
+    }
 }  

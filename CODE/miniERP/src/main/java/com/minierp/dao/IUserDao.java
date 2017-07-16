@@ -11,6 +11,10 @@ public interface IUserDao {
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer id);
+    User selectByUserName(String userName);
+
+    int hasMatchUser(User record);
+
 
     int updateByPrimaryKeySelective(User record);
 

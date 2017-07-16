@@ -19,5 +19,18 @@ public class UserServiceImpl implements IUserService {
     public User getUserById(int userId) {  
         return this.userDao.selectByPrimaryKey(userId);  
     }  
+
+    public User getUserByUserName(String userName) {  
+        return this.userDao.selectByUserName(userName);  
+    }  
+
+    public boolean hasMatchUser(String userName, String password) {
+    	User paramUser = new User();
+    	paramUser.setUserName(userName);
+    	paramUser.setPassword(password);
+    	
+    	int rtn = this.userDao.hasMatchUser(paramUser);
+    	return rtn>0? true: false;
+    }
   
 }  

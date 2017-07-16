@@ -15,6 +15,19 @@
     from user_t
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_t
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <select id="hasMatchUser" resultType="java.lang.Integer" parameterType="com.minierp.model.User" >
+    select 
+    count(1)
+    from user_t
+    where user_name = #{userName,jdbcType=VARCHAR}
+    and password=  #{password,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_t
     where id = #{id,jdbcType=INTEGER}

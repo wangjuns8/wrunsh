@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minierp.dao.ITitleNameDao" >
+  <resultMap id="BaseResultMap" type="com.minierp.model.TitleName" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="table_id" property="tableId" jdbcType="INTEGER" />
+    <result column="title_name" property="titleName" jdbcType="VARCHAR" />
+    <result column="column_name" property="columnName" jdbcType="VARCHAR" />
+    <result column="indx" property="indx" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, table_id, title_name, column_name, indx
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_title_name
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_title_name
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.minierp.model.TitleName" >
+    insert into t_title_name (id, user_id, table_id, title_name, column_name, indx)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{tableId,jdbcType=INTEGER}, #{titleName,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{indx,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.minierp.model.TitleName" >
+    update t_title_name
+    set user_id = #{userId,jdbcType=INTEGER},
+      table_id = #{userId,jdbcType=INTEGER},
+      title_name = #{titleName,jdbcType=VARCHAR},
+      column_name = #{columnName,jdbcType=VARCHAR},
+      indx = #{indx,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

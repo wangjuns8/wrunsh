@@ -12,32 +12,32 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user_t
+    from t_user_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from user_t
+    from t_user_info
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
   <select id="hasMatchUser" resultType="java.lang.Integer" parameterType="com.minierp.model.User" >
     select 
     count(1)
-    from user_t
+    from t_user_info
     where user_name = #{userName,jdbcType=VARCHAR}
     and password=  #{password,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_t
+    delete from t_user_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.minierp.model.User" >
-    insert into user_t (id, user_name, password)
+    insert into t_user_info (id, user_name, password)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.minierp.model.User" >
-    insert into user_t
+    insert into t_user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -62,7 +62,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.minierp.model.User" >
-    update user_t
+    update t_user_info
     <set >
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
@@ -74,7 +74,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.minierp.model.User" >
-    update user_t
+    update t_user_info
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

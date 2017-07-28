@@ -1,5 +1,5 @@
-com\minierp\service\impl\UserServiceImpl.class
 com\minierp\service\IUserService.class
 com\minierp\dao\IUserDao.class
+com\minierp\service\impl\UserServiceImpl.class
 com\minierp\model\User.class
 com\minierp\controller\UserController.class

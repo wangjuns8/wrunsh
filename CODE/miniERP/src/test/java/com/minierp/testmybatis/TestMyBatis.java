@@ -13,7 +13,7 @@ import com.minierp.service.IUserService;
   
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})  
-  
+
 public class TestMyBatis {  
     private static Logger logger = Logger.getLogger(TestMyBatis.class);  
 //  private ApplicationContext ac = null;  

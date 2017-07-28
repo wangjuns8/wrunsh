@@ -63,6 +63,7 @@ public class VerifyCodeServlet extends HttpServlet {
         codeY = height - 4;         
     }
     
+    //verifyCode/getCode
     @RequestMapping(value="/getCode",method=RequestMethod.GET)
     public void service(HttpServletRequest req, HttpServletResponse resp)         
             throws ServletException, java.io.IOException { 

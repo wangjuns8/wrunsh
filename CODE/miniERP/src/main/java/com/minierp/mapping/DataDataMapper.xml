@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minierp.dao.IDataDataDao" >
+  <resultMap id="BaseResultMap" type="com.minierp.model.DataData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="col_1" property="col1" jdbcType="VARCHAR" />
+    <result column="col_2" property="col2" jdbcType="VARCHAR" />
+    <result column="col_3" property="col3" jdbcType="VARCHAR" />
+    <result column="col_4" property="col4" jdbcType="VARCHAR" />
+    <result column="col_5" property="col5" jdbcType="VARCHAR" />
+    <result column="col_6" property="col6" jdbcType="VARCHAR" />
+    <result column="col_7" property="col7" jdbcType="VARCHAR" />
+    <result column="col_8" property="col8" jdbcType="VARCHAR" />
+    <result column="col_9" property="col9" jdbcType="VARCHAR" />
+    <result column="col_10" property="col10" jdbcType="VARCHAR" />
+    <result column="col_11" property="col11" jdbcType="VARCHAR" />
+    <result column="col_12" property="col12" jdbcType="VARCHAR" />
+    <result column="col_13" property="col13" jdbcType="VARCHAR" />
+    <result column="col_14" property="col14" jdbcType="VARCHAR" />
+    <result column="col_15" property="col15" jdbcType="VARCHAR" />
+    <result column="col_16" property="col16" jdbcType="VARCHAR" />
+    <result column="col_17" property="col17" jdbcType="VARCHAR" />
+    <result column="col_18" property="col18" jdbcType="VARCHAR" />
+    <result column="col_19" property="col19" jdbcType="VARCHAR" />
+    <result column="col_20" property="col20" jdbcType="VARCHAR" />
+    <result column="col_21" property="col21" jdbcType="VARCHAR" />
+    <result column="col_22" property="col22" jdbcType="VARCHAR" />
+    <result column="col_23" property="col23" jdbcType="VARCHAR" />
+    <result column="col_24" property="col24" jdbcType="VARCHAR" />
+    <result column="col_25" property="col25" jdbcType="VARCHAR" />
+    <result column="col_26" property="col26" jdbcType="VARCHAR" />
+    <result column="col_27" property="col27" jdbcType="VARCHAR" />
+    <result column="col_28" property="col28" jdbcType="VARCHAR" />
+    <result column="col_29" property="col29" jdbcType="VARCHAR" />
+    <result column="col_30" property="col30" jdbcType="VARCHAR" />
+    <result column="col_31" property="col31" jdbcType="VARCHAR" />
+    <result column="col_32" property="col32" jdbcType="VARCHAR" />
+    <result column="col_33" property="col33" jdbcType="VARCHAR" />
+    <result column="col_34" property="col34" jdbcType="VARCHAR" />
+    <result column="col_35" property="col35" jdbcType="VARCHAR" />
+    <result column="col_36" property="col36" jdbcType="VARCHAR" />
+    <result column="col_37" property="col37" jdbcType="VARCHAR" />
+    <result column="col_38" property="col38" jdbcType="VARCHAR" />
+    <result column="col_39" property="col39" jdbcType="VARCHAR" />
+    <result column="col_40" property="col40" jdbcType="VARCHAR" />
+    <result column="col_41" property="col41" jdbcType="VARCHAR" />
+    <result column="col_42" property="col42" jdbcType="VARCHAR" />
+    <result column="col_43" property="col43" jdbcType="VARCHAR" />
+    <result column="col_44" property="col44" jdbcType="VARCHAR" />
+    <result column="col_45" property="col45" jdbcType="VARCHAR" />
+    <result column="col_46" property="col46" jdbcType="VARCHAR" />
+    <result column="col_47" property="col47" jdbcType="VARCHAR" />
+    <result column="col_48" property="col48" jdbcType="VARCHAR" />
+    <result column="col_49" property="col49" jdbcType="VARCHAR" />
+    <result column="col_50" property="col50" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <update id="createNewTable">
+	create table `${realTableName}`(
+	    `id` int(11) NOT NULL AUTO_INCREMENT,
+	    <foreach collection="newColumns" index="index" item="item">
+		`${item.columnName}` varchar(1000) COMMENT #{item.titleName},
+		</foreach>
+	    PRIMARY KEY (`id`)
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT #{tableName};
+  </update>
+  
+  <insert id="insertDataData">
+    INSERT INTO `${realTableName}` VALUES (null,
+      <foreach collection="dataList" index="index" item="item" open="'" separator="','" close="');">
+        ${item}
+      </foreach>
+  </insert>
+
+
+</mapper>

@@ -43,3 +43,28 @@ CREATE TABLE `t_title_name` (
   `indx` int(11) NOT NULL COMMENT 'column的排序',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户创建的列名';
+
+
+delete * from t_table_name;
+delete * from t_title_name;
+
+
+create table `${realTableName}`(
+	    `id` int(11) NOT NULL AUTO_INCREMENT,
+	    <foreach collection="newColumns" index="index" item="item">
+		`${item.columnName}` varchar(1000) COMMENT #{item.titleName},
+		</foreach>
+	    PRIMARY KEY (`id`)
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT #{tableName};
+
+	
+INSERT INTO `${realTableName}` VALUES 
+<foreach collection="dataDataList" index="index" item="item" open="('" separator="','" close="');">
+    ${item}
+</foreach>
+
+
+
+
+
+

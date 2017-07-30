@@ -25,8 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.minierp.common.CommonFileUtils;
 import com.minierp.common.ExcelHelper;
 import com.minierp.common.StringHelper;
+import com.minierp.model.DataData;
 import com.minierp.model.TableName;
+import com.minierp.model.TitleName;
 import com.minierp.model.User;
+import com.minierp.service.IDataDataService;
 import com.minierp.service.ITableNameService;
 import com.minierp.service.ITitleNameService;
 
@@ -38,6 +41,8 @@ public class UploadFileController {
 	 private ITableNameService tableNameService;
 	@Resource  
 	 private ITitleNameService titleNameService;
+	@Resource  
+	 private IDataDataService dataDataService;
 	
 	//	/uploadFile/upload.html
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
@@ -76,11 +81,13 @@ public class UploadFileController {
     			if ( user==null || user.getId()==null ) {
     				return new ModelAndView("login");
     			}
+//为测试方便，去掉    			
+//    			if( tableNameService.hasMatchTableName(targetFile.getName()) ) {
+//    				return new ModelAndView("index", "error", "该文件已存在！");
+//    			}
     			
-    			if( tableNameService.hasMatchTableName(targetFile.getName()) ) {
-    				return new ModelAndView("index", "error", "该文件已存在！");
-    			}
     			
+    			//1.将文件名作为表名存入数据库，并创建新的DB table name
     			TableName newTableName = tableNameService.insertTableName(user.getId(), targetFile.getName() );
     			
                 //读取Excel文件内容
@@ -122,10 +129,18 @@ public class UploadFileController {
 				curCol++;
 			}
 			
+			//第一行默认是列名-title
 			if ( curRow == 0 ) {
-				titleNameService.insertTitleName(user.getId(), newTableName.getId(), rowDataList);
+				//2. 将Excel文件首行的内容作为列表保存到数据库，并创建DB column name
+				List<TitleName> newTitleNameList = titleNameService.insertTitleName(user.getId(), newTableName.getId(), rowDataList);
+				//3. 动态创建数据表
+				dataDataService.createNewTable(newTableName.getRealTableName(), newTitleNameList, newTableName.getTableName());
+			} else {
+				//4. 将数据插入新建的数据表中
+				System.out.println("row["+curRow+"]: " + rowDataList); 
+				dataDataService.insertDataData(newTableName.getRealTableName(), rowDataList);
 			}
-			System.out.println("row["+curRow+"]: " + rowDataList); 
+			
 			curRow++;
 		}
 		
